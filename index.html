@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#171714"><meta name="description" content="Your personal AI-inspired men's wardrobe stylist.">
+<link rel="manifest" href="manifest.webmanifest">
+<title>FORME — Personal Style</title>
+<style>
+:root{--ink:#191916;--paper:#f5f3ed;--muted:#85847d;--line:#e3e0d7;--olive:#74765a;--white:#fff;--serif:Georgia,'Times New Roman',serif}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,Helvetica,sans-serif}
+header{background:#191916;color:#f7f5ee;padding:24px 20px 20px;position:sticky;top:0;z-index:3}
+.top{display:flex;justify-content:space-between;align-items:center}.brand{font: bold 22px var(--serif);letter-spacing:3px}.tag{font-size:9px;letter-spacing:2px;color:#bdbba9}
+main{max-width:760px;margin:auto;padding:20px 16px 100px}.eyebrow{font-size:10px;letter-spacing:2px;color:var(--olive);font-weight:bold;text-transform:uppercase}
+h1{font:normal 36px/1.05 var(--serif);margin:10px 0 8px;letter-spacing:-1px}h2{font:normal 25px var(--serif);margin:0 0 6px}.sub{font-size:13px;line-height:1.5;color:var(--muted);margin:0}
+.hero{background:#e6e3d8;border-radius:18px;padding:22px;margin:18px 0 24px;position:relative;overflow:hidden}.hero:after{content:"";position:absolute;width:180px;height:180px;border:1px solid #c5c2b5;border-radius:50%;right:-55px;top:-55px}.hero p{max-width:75%;font-size:13px;line-height:1.5;color:#626257}
+.btn{border:0;border-radius:30px;background:var(--ink);color:white;padding:12px 18px;font-size:12px;font-weight:bold;letter-spacing:.4px;cursor:pointer}.btn.light{background:transparent;border:1px solid #aaa89c;color:var(--ink)}.btn.olive{background:var(--olive)}.btn.small{padding:9px 13px;font-size:11px}
+.sectionhead{display:flex;justify-content:space-between;align-items:end;margin:24px 0 13px}.count{font-size:11px;color:var(--muted)}
+.tabs{display:flex;gap:8px;margin:16px 0;overflow:auto}.tab{white-space:nowrap;border:1px solid var(--line);border-radius:30px;padding:9px 14px;font-size:11px;background:transparent;color:var(--ink)}.tab.active{background:var(--ink);color:white;border-color:var(--ink)}
+.panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:14px}
+.uploadrow{display:grid;grid-template-columns:1fr 1fr;gap:10px}.uploadbox{border:1px dashed #c8c5b9;border-radius:13px;padding:15px 10px;text-align:center;min-height:110px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;cursor:pointer}.uploadbox b{font:18px var(--serif)}.uploadbox span{font-size:10px;color:var(--muted)}
+input[type=file]{display:none}.wardrobe{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.item{position:relative;background:white;border:1px solid var(--line);border-radius:12px;overflow:hidden}.item img{width:100%;height:135px;object-fit:cover;background:#e9e6de}.iteminfo{padding:9px}.iteminfo strong{display:block;font-size:11px}.iteminfo small{font-size:10px;color:var(--muted)}.delete{position:absolute;right:7px;top:7px;border:0;background:#ffffffdf;border-radius:50%;width:25px;height:25px}
+.look{display:grid;grid-template-columns:1fr 1fr;gap:10px}.piece{background:#e9e6de;border-radius:12px;overflow:hidden;min-height:170px;position:relative}.piece img{width:100%;height:190px;object-fit:cover}.piece .placeholder{height:190px;display:grid;place-items:center;color:#aaa;font:italic 14px var(--serif)}.piece label{display:block;background:#fff;padding:9px;font-size:11px}
+.matchcard{background:#fff;border:1px solid var(--line);border-radius:17px;padding:14px;margin:12px 0}.matchtop{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.score{font-size:10px;color:var(--olive);letter-spacing:1px;font-weight:bold}.reason{font-size:12px;line-height:1.5;color:#696960;margin:10px 0}.tags{display:flex;flex-wrap:wrap;gap:6px}.tagpill{font-size:9px;background:#efeee8;border-radius:20px;padding:6px 9px;color:#66665b}
+.empty{text-align:center;padding:28px 12px;color:var(--muted);font-size:12px;line-height:1.6}.empty b{display:block;font:20px var(--serif);color:var(--ink);margin-bottom:7px}
+nav{position:fixed;bottom:0;left:0;right:0;background:#fffF;border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:10px 4px calc(10px + env(safe-area-inset-bottom));z-index:4;backdrop-filter:blur(12px)}nav button{border:0;background:none;color:#8b897f;font-size:10px;display:grid;gap:4px;justify-items:center}nav button.active{color:var(--ink);font-weight:bold}nav i{font-style:normal;font-size:18px}
+.page{display:none}.page.active{display:block}.note{font-size:10px;color:#8c8a80;line-height:1.5;margin:12px 2px}.field{border:1px solid var(--line);background:white;border-radius:10px;padding:11px;width:100%;font-size:12px;margin:7px 0}
+@media(min-width:600px){main{padding:28px 24px 110px}.wardrobe{grid-template-columns:repeat(4,1fr)}.item img{height:170px}}
+</style></head>
+<body>
+<header><div class="top"><div class="brand">FORME</div><div class="tag">PERSONAL STYLE STUDIO</div></div></header>
+<main>
+<section id="home" class="page active">
+<div class="eyebrow">Your wardrobe, reimagined</div><h1>Dress with<br><i>intention.</i></h1><p class="sub">A personal stylist for the clothes you already own.</p>
+<div class="hero"><div class="eyebrow">THE DAILY EDIT</div><h2>Better outfits.<br>Less guesswork.</h2><p>Add your shirts and trousers. FORME will build combinations using colour harmony, pattern balance and timeless men's style principles.</p><button class="btn" onclick="showPage('wardrobe')">BUILD MY WARDROBE →</button></div>
+<div class="sectionhead"><div><div class="eyebrow">Your collection</div><h2>Wardrobe overview</h2></div><span class="count" id="overviewCount">0 pieces</span></div>
+<div class="panel"><div class="uploadrow">
+<label class="uploadbox"><b>＋ Shirt</b><span>Add a shirt photo</span><input type="file" accept="image/*" onchange="addItem('shirt',this)"></label>
+<label class="uploadbox"><b>＋ Pants</b><span>Add a pants photo</span><input type="file" accept="image/*" onchange="addItem('pants',this)"></label>
+</div><p class="note">Photos stay on this device in this first version. Use clear, well-lit photos with one clothing item per image.</p></div>
+<div class="sectionhead"><div><div class="eyebrow">Curated style direction</div><h2>Trend notes</h2></div></div>
+<div class="tags"><span class="tagpill">Quiet luxury</span><span class="tagpill">Earth tones</span><span class="tagpill">Relaxed tailoring</span><span class="tagpill">Clean sneakers</span><span class="tagpill">Smart casual</span></div>
+<p class="note">Trend notes are starter style guidance, not live Pinterest rankings. Pinterest saves, likes and popularity data are not connected in this prototype.</p>
+</section>
+
+<section id="wardrobe" class="page">
+<div class="eyebrow">Your personal closet</div><h1>The wardrobe.</h1><p class="sub">Add photos of your own clothes to start creating looks.</p>
+<div class="tabs"><button class="tab active" onclick="filterItems('all',this)">All items</button><button class="tab" onclick="filterItems('shirt',this)">Shirts</button><button class="tab" onclick="filterItems('pants',this)">Pants</button></div>
+<div class="panel"><div class="uploadrow">
+<label class="uploadbox"><b>＋ Add shirt</b><span>Jersey, tee, formal, etc.</span><input type="file" accept="image/*" onchange="addItem('shirt',this)"></label>
+<label class="uploadbox"><b>＋ Add pants</b><span>Jeans, chinos, trousers, etc.</span><input type="file" accept="image/*" onchange="addItem('pants',this)"></label>
+</div></div>
+<div class="wardrobe" id="wardrobeGrid"></div><div class="empty" id="wardrobeEmpty"><b>Your closet starts here.</b>Add at least one shirt and one pair of pants.</div>
+</section>
+
+<section id="matches" class="page">
+<div class="eyebrow">Styled from your own clothes</div><h1>Outfit matches.</h1><p class="sub">Combinations ranked by colour harmony, versatility and pattern balance.</p>
+<div class="sectionhead"><h2>Best combinations</h2><span class="count" id="matchCount">0 looks</span></div>
+<div id="matchResults"><div class="empty"><b>Ready when you are.</b>Add a shirt and pants to generate your first outfits.</div></div>
+<p class="note">The score is a rule-based styling estimate, not a guarantee of personal taste or current popularity.</p>
+</section>
+
+<section id="saved" class="page">
+<div class="eyebrow">Your personal edit</div><h1>Saved looks.</h1><p class="sub">Keep the combinations you want to wear again.</p><div id="savedResults"><div class="empty"><b>No saved outfits yet.</b>Save a combination from Outfit Matches.</div></div>
+</section>
+</main>
+<nav>
+<button class="active" onclick="showPage('home',this)"><i>⌂</i>Home</button>
+<button onclick="showPage('wardrobe',this)"><i>▦</i>Wardrobe</button>
+<button onclick="showPage('matches',this)"><i>✳</i>Matches</button>
+<button onclick="showPage('saved',this)"><i>♡</i>Saved</button>
+</nav>
+<script>
+let items=JSON.parse(localStorage.getItem('forme_items')||'[]'), saved=JSON.parse(localStorage.getItem('forme_saved')||'[]'), currentFilter='all';
+const $=id=>document.getElementById(id);
+function persist(){localStorage.setItem('forme_items',JSON.stringify(items));localStorage.setItem('forme_saved',JSON.stringify(saved));render()}
+function showPage(id,btn){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));$(id).classList.add('active');document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');else [...document.querySelectorAll('nav button')].find(b=>b.textContent.toLowerCase().includes(id==='home'?'home':id))?.classList.add('active');render()}
+function addItem(type,input){let f=input.files[0];if(!f)return;if(!f.type.startsWith('image/'))return alert('Please choose an image.');let r=new FileReader();r.onload=()=>{let img=new Image();img.onload=()=>{let c=document.createElement('canvas'),ctx=c.getContext('2d');c.width=24;c.height=24;ctx.drawImage(img,0,0,24,24);let d=ctx.getImageData(0,0,24,24).data,rr=0,gg=0,bb=0,n=0;for(let i=0;i<d.length;i+=4){if(d[i+3]>100){rr+=d[i];gg+=d[i+1];bb+=d[i+2];n++}}let color=n?`rgb(${Math.round(rr/n)}, ${Math.round(gg/n)}, ${Math.round(bb/n)})`:'unknown';items.push({id:Date.now()+Math.random(),type,name:f.name.replace(/\.[^.]+$/,'').slice(0,22),src:r.result,color});persist();input.value=''};img.src=r.result};r.readAsDataURL(f)}
+function removeItem(id){items=items.filter(x=>x.id!==id);saved=saved.filter(x=>x.shirt!==id&&x.pants!==id);persist()}
+function filterItems(f,el){currentFilter=f;document.querySelectorAll('.tabs .tab').forEach(b=>b.classList.remove('active'));el.classList.add('active');renderWardrobe()}
+function renderWardrobe(){let arr=items.filter(x=>currentFilter==='all'||x.type===currentFilter);$('wardrobeGrid').innerHTML=arr.map(x=>`<div class="item"><button class="delete" onclick="removeItem(${x.id})">×</button><img src="${x.src}"><div class="iteminfo"><strong>${esc(x.name)}</strong><small>${x.type==='shirt'?'Shirt':'Pants'} · ${x.color}</small></div></div>`).join('');$('wardrobeEmpty').style.display=arr.length?'none':'block'}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function rgb(s){let m=s.match(/\d+/g)||[128,128,128];return m.slice(0,3).map(Number)}
+function classify(c){let [r,g,b]=rgb(c),max=Math.max(r,g,b),min=Math.min(r,g,b),sat=max?((max-min)/max):0;if(max<65)return'black';if(min>205&&sat<.18)return'white';if(sat<.2)return'neutral';if(r>g*1.25&&r>b*1.2)return'earth/red';if(r>g*1.12&&g>b*1.1)return'earth';if(g>b*1.15&&g>r*1.1)return'green';if(b>r*1.15&&b>g*1.05)return'blue';return'colour'}
+function score(a,b){let x=classify(a.color),y=classify(b.color),s=68,why='A balanced everyday combination with room to style it your way.';if(x===y)s=73,why='A tonal pairing. Keep the shades slightly different for depth.';if(['black','white','neutral'].includes(x)||['black','white','neutral'].includes(y))s=91,why='A versatile neutral pairing. The clean colour balance makes this easy to wear.';if((x==='blue'&&y==='earth')||(x==='earth'&&y==='blue'))s=94,why='Blue and earthy tones create a refined, modern contrast.';if((x==='green'&&y==='neutral')||(y==='green'&&x==='neutral'))s=92,why='Muted green with a neutral base gives an understated, current look.';if((x==='earth/red'&&y==='blue')||(y==='earth/red'&&x==='blue'))s=86,why='A confident warm-cool contrast. Keep shoes and accessories understated.';return {s,why,x,y}}
+function makeMatches(){let shirts=items.filter(x=>x.type==='shirt'),pants=items.filter(x=>x.type==='pants'),all=[];shirts.forEach(a=>pants.forEach(b=>{let z=score(a,b);all.push({shirt:a,pants:b,...z})}));return all.sort((a,b)=>b.s-a.s).slice(0,12)}
+function lookHTML(m,saveButton=true){let exists=saved.some(x=>x.shirt===m.shirt.id&&x.pants===m.pants.id);return `<div class="matchcard"><div class="matchtop"><span class="score">STYLE MATCH · ${m.s}/100</span><span class="count">${m.s>=90?'HIGH HARMONY':m.s>=80?'GOOD CONTRAST':'CLASSIC PAIRING'}</span></div><div class="look"><div class="piece"><img src="${m.shirt.src}"><label>SHIRT · ${esc(m.shirt.name)}</label></div><div class="piece"><img src="${m.pants.src}"><label>PANTS · ${esc(m.pants.name)}</label></div></div><p class="reason">${m.why}</p><div class="tags"><span class="tagpill">${m.x}</span><span class="tagpill">${m.y}</span><span class="tagpill">Smart casual potential</span></div>${saveButton?`<div style="margin-top:13px"><button class="btn small ${exists?'light':'olive'}" onclick="toggleSave(${m.shirt.id},${m.pants.id})">${exists?'♥ Saved':'♡ Save this look'}</button></div>`:''}</div>`}
+function toggleSave(s,p){let i=saved.findIndex(x=>x.shirt===s&&x.pants===p);if(i>=0)saved.splice(i,1);else saved.push({shirt:s,pants:p});persist()}
+function render(){ $('overviewCount').textContent=items.length+' pieces';renderWardrobe();let m=makeMatches();$('matchCount').textContent=m.length+' looks';$('matchResults').innerHTML=m.length?m.map(x=>lookHTML(x)).join(''):'<div class="empty"><b>Add your clothes first.</b>You need at least one shirt and one pair of pants to see outfit combinations.</div>';let sm=saved.map(x=>{let shirt=items.find(i=>i.id===x.shirt),pants=items.find(i=>i.id===x.pants);if(!shirt||!pants)return null;return {shirt,pants,...score(shirt,pants)}}).filter(Boolean);$('savedResults').innerHTML=sm.length?sm.map(x=>lookHTML(x,false)).join(''):'<div class="empty"><b>No saved outfits yet.</b>Save a combination from Outfit Matches.</div>'}
+render();
+if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+</script></body></html>
